@@ -1,12 +1,22 @@
+import { useState } from "react";
+
 import '@styles/global.css';
 
-import { Input } from "@components/Input";
+import { Task } from "@components/Task";
 
 export function App() {
+    const [isDone, setIsDone] = useState(false);
+
+    function completeTask() {
+        setIsDone(isDone => !isDone);
+    }
+
     return (
         <div className="p-4">
-            <Input
-                placeholder="Adicione uma nova tarefa"
+            <Task
+                text="Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer. Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer."
+                done={ isDone }
+                onCompleteTask={ completeTask }
             />
         </div>
     );
