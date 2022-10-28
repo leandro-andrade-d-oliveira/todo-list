@@ -4,31 +4,32 @@ import clsx from "clsx";
 
 const animation = "transition-all ease-linear duration-500";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TaskProps extends InputHTMLAttributes<HTMLInputElement> {
     text: string;
-    done: boolean;
+    isDone: boolean;
     onCompleteTask: () => void;
+    onDeleteTask: () => void;
 }
 
-export function Task({ text, done, onCompleteTask }: InputProps) {
+export function Task({ text, isDone, onCompleteTask, onDeleteTask }: TaskProps) {
     let checkIcon: JSX.Element;
     let textClassName: string;
 
-    if (done) {
+    if (isDone) {
+        textClassName = "text-gray-300 line-through";
         checkIcon = <CheckCircle
             onClick={ onCompleteTask }
             size={ 24 }
             weight="fill"
             className={ clsx(animation, "text-purple-dark hover:text-purple flex-none cursor-pointer") }
         />;
-        textClassName = "text-gray-300 line-through";
     } else {
+        textClassName = "text-gray-100";
         checkIcon = <Circle
             onClick={ onCompleteTask }
             size={ 24 }
             className={ clsx(animation, "text-blue hover:text-blue-dark flex-none cursor-pointer") }
         />;
-        textClassName = "text-gray-100";
     }
 
     return (
@@ -41,7 +42,12 @@ export function Task({ text, done, onCompleteTask }: InputProps) {
                 </span>
             </div>
 
-            <Trash size={ 24 } weight="bold" className="p-1 rounded text-gray-300 hover:text-danger hover:bg-gray-400 flex-none" />
+            <Trash
+                size={ 24 }
+                weight="bold"
+                className="p-1 rounded text-gray-300 hover:text-danger hover:bg-gray-400 flex-none"
+                onClick={ onDeleteTask }
+            />
         </div>
     );
 }
