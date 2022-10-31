@@ -1,12 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 import '@styles/global.css';
-
-import Logo from '@assets/logo.svg';
+import styles from './App.module.css';
 
 import { Input } from "@components/Input";
 import { CreateButton } from "@components/CreateButton";
-import { Task } from "@components/Task";
+import { Header } from "@components/Header";
+import { TasksInfo } from "@components/TasksInfo";
+import { TasksList } from "@components/TasksList";
 
 interface ITask {
     id: string;
@@ -26,7 +28,7 @@ export function App() {
         event.preventDefault();
 
         const newTask: ITask = {
-            id: (new Date()).toISOString(),
+            id: uuid(),
             isDone: false,
             text: newTaskText,
         };
@@ -57,34 +59,18 @@ export function App() {
     const tasksCompleted = tasks.reduce((acc, cur) => cur.isDone ? acc + 1 : acc, 0);
 
     return (
-        <div className="bg-gray-600 h-screen w-screen px-88">
-            <header className="bg-gray-700 flex pt-[72px] justify-center h-[200px]">
-                <img src={ Logo } width={ 126 } height={ 48 } alt="Logotipo do Ignite" className="h-fit" />
-            </header>
+        <div className={ styles.container }>
+            <Header />
 
-            <main className="mx-80 flex flex-col gap-16">
-                <form className="flex gap-2 mt-[-25px]" onSubmit={ handleCreateNewTask }>
+            <main>
+                <form className={ styles.form } onSubmit={ handleCreateNewTask }>
                     <Input placeholder="Adicione uma nova tarefa" value={ newTaskText } onChange={ handleNewTaskChange } required />
                     <CreateButton type="submit" />
                 </form>
 
-                <div className="flex flex-col gap-1">
-                    <div className="flex items-center justify-between">
-                        <span className="text-purple">Total de Tarefas: { totalTasks }</span>
-                        <span  className="text-blue">Concluídas { tasksCompleted } de { totalTasks }</span>
-                    </div>
-
-                    <div className="flex flex-col items-center gap-1">
-                        { tasks.map(({ id, isDone, text }) => (
-                            <Task
-                                key={ id }
-                                isDone={ isDone }
-                                text={ text }
-                                onCompleteTask={ handleCompleteTask.bind(null, id) }
-                                onDeleteTask={ handleDeleteTask.bind(null, id) }
-                            />
-                        )) }
-                    </div>
+                <div className={ styles.todoList }>
+                    <TasksInfo tasksCompleted={ tasksCompleted } totalTasks={ totalTasks } />
+                    <TasksList tasks={tasks} onCompleteTask={ handleCompleteTask } onDeleteTask={ handleDeleteTask }/>
                 </div>
             </main>
         </div>

@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--gray-500);
+}
+
+.container:focus-within {
+    border: 1px solid var(--purple-dark);
+}
+
+.input {
+    flex: 1;
+    background-color: var(--transparent);
+    color: var(--gray-100);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}
+
+.input::placeholder {
+    color: var(--gray-300);
+}

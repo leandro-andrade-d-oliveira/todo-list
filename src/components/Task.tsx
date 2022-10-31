@@ -1,8 +1,7 @@
 import { InputHTMLAttributes } from "react";
 import { Circle, CheckCircle, Trash } from "phosphor-react";
-import clsx from "clsx";
 
-const animation = "transition-all ease-linear duration-500";
+import styles from './Task.module.css';
 
 interface TaskProps extends InputHTMLAttributes<HTMLInputElement> {
     text: string;
@@ -13,31 +12,28 @@ interface TaskProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function Task({ text, isDone, onCompleteTask, onDeleteTask }: TaskProps) {
     let checkIcon: JSX.Element;
-    let textClassName: string;
 
     if (isDone) {
-        textClassName = "text-gray-300 line-through";
         checkIcon = <CheckCircle
             onClick={ onCompleteTask }
             size={ 24 }
             weight="fill"
-            className={ clsx(animation, "text-purple-dark hover:text-purple flex-none cursor-pointer") }
+            className={ styles.checkboxChecked }
         />;
     } else {
-        textClassName = "text-gray-100";
         checkIcon = <Circle
             onClick={ onCompleteTask }
             size={ 24 }
-            className={ clsx(animation, "text-blue hover:text-blue-dark flex-none cursor-pointer") }
+            className={ styles.checkboxUnchecked }
         />;
     }
 
     return (
-        <div className="flex items-center justify-between p-4 rounded-lg w-full bg-gray-500">
-            <div className="flex gap-3">
+        <div className={ `${styles.container} ${ isDone && styles.taskDone }` }>
+            <div className={ styles.content }>
                 { checkIcon }
 
-                <span className={ clsx("text-md", animation, textClassName) }>
+                <span className={ styles.text }>
                     { text }
                 </span>
             </div>
@@ -45,7 +41,7 @@ export function Task({ text, isDone, onCompleteTask, onDeleteTask }: TaskProps) 
             <Trash
                 size={ 24 }
                 weight="bold"
-                className="p-1 rounded text-gray-300 hover:text-danger hover:bg-gray-400 flex-none"
+                className={ styles.trash }
                 onClick={ onDeleteTask }
             />
         </div>

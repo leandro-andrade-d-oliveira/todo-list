@@ -1,0 +1,30 @@
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info > span {
+    font-weight: 700;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+
+.tasksCreated {
+    color: var(--blue);
+}
+
+.tasksCompleted {
+    color: var(--purple);
+}
+
+.counter {
+    padding: 0.125rem 0.5rem;
+    background-color: var(--gray-400);
+    color: var(--gray-200);
+    border-radius: 1000px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 8px;
+}

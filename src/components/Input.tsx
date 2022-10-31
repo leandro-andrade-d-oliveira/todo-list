@@ -1,15 +1,13 @@
 import { InputHTMLAttributes } from "react";
 
+import styles from './Input.module.css';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 export function Input(props: InputProps) {
     return (
-        <div className="flex items-center p-4 rounded-lg w-full bg-gray-500 focus-within:ring-1 ring-purple-dark">
-            <input
-                type="text"
-                className="flex-1 bg-transparent outline-none text-gray-100 text-lg placeholder:text-gray-300"
-                { ...props }
-            />
+        <div className={ styles.container }>
+            <input type="text" className={ styles.input } { ...props } />
         </div>
     );
 }
