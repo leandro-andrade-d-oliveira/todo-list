@@ -28,3 +28,9 @@
     font-weight: 700;
     margin-left: 8px;
 }
+
+@media (max-width: 425px) {
+    .info span {
+        font-size: 80%;
+    }
+}
