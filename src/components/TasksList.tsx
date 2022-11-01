@@ -1,6 +1,6 @@
 import styles from './TasksList.module.css';
 
-import list from "@assets/list.svg";
+import ListIcon from "@assets/list.svg";
 
 import { Task } from "@components/Task";
 
@@ -20,7 +20,7 @@ export function TasksList({ tasks, onCompleteTask, onDeleteTask }: TasksListProp
     if (!tasks.length) {
         return (
             <div className={ styles.emptyList }>
-                <img src={ list } alt="Logotipo da aplicação ToDo List" className={ styles.logo } />
+                <ListIcon />
 
                 <div className={ styles.emptyListInfo }>
                     <span>Você ainda não tem tarefas cadastradas</span>

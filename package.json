@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "clsx": "^1.2.1",
-    "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0",
+    "vite-plugin-svgr": "^2.2.2",
     "vite-tsconfig-paths": "^3.5.2"
   },
   "devDependencies": {

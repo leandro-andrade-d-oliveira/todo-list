@@ -1,7 +1,10 @@
 import { InputHTMLAttributes } from "react";
-import { Circle, CheckCircle, Trash } from "phosphor-react";
 
 import styles from './Task.module.css';
+
+import Checked from "@assets/checked.svg";
+import Unchecked from "@assets/unchecked.svg";
+import Trash from "@assets/trash.svg";
 
 interface TaskProps extends InputHTMLAttributes<HTMLInputElement> {
     text: string;
@@ -12,38 +15,31 @@ interface TaskProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function Task({ text, isDone, onCompleteTask, onDeleteTask }: TaskProps) {
     let checkIcon: JSX.Element;
+    let checkStyle: string;
 
     if (isDone) {
-        checkIcon = <CheckCircle
-            onClick={ onCompleteTask }
-            size={ 24 }
-            weight="fill"
-            className={ styles.checkboxChecked }
-        />;
+        checkIcon = <Checked />;
+        checkStyle = styles.checkboxChecked;
     } else {
-        checkIcon = <Circle
-            onClick={ onCompleteTask }
-            size={ 24 }
-            className={ styles.checkboxUnchecked }
-        />;
+        checkIcon = <Unchecked />;
+        checkStyle = styles.checkboxUnchecked;
     }
 
     return (
         <div className={ `${styles.container} ${ isDone && styles.taskDone }` }>
             <div className={ styles.content }>
-                { checkIcon }
+                <div className={ checkStyle } onClick={ onCompleteTask }>
+                    { checkIcon }
+                </div>
 
                 <span className={ styles.text }>
                     { text }
                 </span>
             </div>
 
-            <Trash
-                size={ 24 }
-                weight="bold"
-                className={ styles.trash }
-                onClick={ onDeleteTask }
-            />
+            <div className={ styles.trash } onClick={ onDeleteTask }>
+                <Trash />
+            </div>
         </div>
     );
 }
